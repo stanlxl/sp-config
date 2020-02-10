@@ -1,6 +1,11 @@
 spring:
   application:
     name: zuul
+  rabbitmq:
+    host: 192.168.64.140
+    port: 5672
+    username: admin
+    password: admin
     
 server:
   port: 3001
@@ -17,7 +22,7 @@ zuul:
     order-service: /order-service/**
 
 
-  retryable: true  #默认false，zuul不推荐使用重试
+  retryable: true  #榛樿false锛寊uul涓嶆帹鑽愪娇鐢ㄩ噸璇�
 
 
 ribbon:
