@@ -1,12 +1,15 @@
 spring:
   application:
     name: zuul
+  cloud:
+    config:
+      override-none: true
   rabbitmq:
     host: 192.168.64.140
     port: 5672
     username: admin
     password: admin
-    
+
 server:
   port: 3001
   
@@ -16,24 +19,24 @@ eureka:
       defaultZone: http://eureka1:2001/eureka, http://eureka2:2002/eureka
 
 zuul:
-  routes:
-    item-service: /item-service/**
-    user-service: /user-service/**
-    order-service: /order-service/**
-
-
-  retryable: true  #榛樿false锛寊uul涓嶆帹鑽愪娇鐢ㄩ噸璇�
-
-
+  retryable: true
+    
 ribbon:
-  ConnectTimeout: 500
-  readTimeout: 500
+  ConnectTimeout: 1000
+  ReadTimeout: 1000
+  MaxAutoRetriesNextServer: 1
   MaxAutoRetries: 1
-  MaxAutoRetriesNextServer: 2
   
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 500
+            
 management:
   endpoints:
     web:
       exposure:
         include: hystrix.stream
-        
